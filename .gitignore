@@ -1,0 +1,17 @@
+# Node modules
+node_modules/
+
+# Build output
+build/
+dist/
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# TypeScript files
+*.tsbuildinfo
+
+# Environment variables
+.env
