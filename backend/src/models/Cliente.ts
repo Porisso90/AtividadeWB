@@ -1,11 +1,9 @@
-import { Consumo } from './Consumo';
-export class Cliente {
-    constructor(
-      public id: number,
-      public nome: string,
-      public genero: 'M' | 'F',
-      public totalGasto: number = 0,
-      public consumoProdutos: Consumo[] = []
-    ) {}
-  }
-  
+// Cliente.ts
+export interface Cliente {
+  id: number;
+  nome: string;
+  genero: string; // Adicione a propriedade gênero
+  idade: number;  // Adicione a propriedade idade
+  email: string;
+  telefone: string;
+}
