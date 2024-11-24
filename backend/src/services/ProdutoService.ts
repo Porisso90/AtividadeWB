@@ -6,17 +6,19 @@ export class ProdutoService {
   private produtos: Produto[] = [];
   private produtoMap = new Map<number, Produto>();
   private proximoId: number = 1;
-  listarProdutos() {
+  listarProdutos(): Produto[] {
     if (this.produtos.length === 0) {
       console.log('Nenhum produto ou serviço cadastrado.');
+      return [];  // Retorna um array vazio caso não tenha produtos
     } else {
       this.produtos.forEach((produto) =>
         console.log(`ID: ${produto.id}, Nome: ${produto.nome}, Valor: ${produto.valor}`)
       );
+      return this.produtos;  // Retorna o array de produtos
     }
   }
 
-  atualizarProduto(id: number, novoNome: string, novoValor: number, novaCategoria: string) {
+  atualizarProduto(id: number, novoNome: string, novoValor: number, _novaCategoria: string) {
     const produto = this.produtos.find((p) => p.id === id);
     if (produto) {
       produto.nome = novoNome;
@@ -44,7 +46,12 @@ export class ProdutoService {
       this.proximoId++;
   }
   obterValorPorId(id: number): number {
-      return this.produtoMap.get(id)?.valor || 0;
-  }
+    const produto = this.produtoMap.get(id);
+    if (!produto) {
+        throw new Error(`Produto com ID ${id} não encontrado`);
+    }
+    return produto.valor;
+}
+
   
 }

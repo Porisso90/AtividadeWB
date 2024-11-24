@@ -60,16 +60,12 @@ export class ClienteService {
       console.error("Cliente não encontrado.");
     }
   }
-  registrarConsumo(clienteId: number, produtoId: number): void {
-    const consumo: Consumo = {
-        clienteId,
-        produtoId,
-        data: new Date(),
-    };
+  registrarConsumo(clienteId: number, produtoId: number, quantidade: number): void {
+    const consumo = new Consumo(clienteId, produtoId, quantidade);  // Passando quantidade agora
     this.consumos.push(consumo);
     console.log("Consumo registrado com sucesso!");
-}
-
+  }
+  
 // Método para listar todos os consumos
 listarConsumoes(): Consumo[] {
     return this.consumos;

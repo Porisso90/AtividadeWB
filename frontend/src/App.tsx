@@ -1,32 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import ClienteForm from "./components/ClienteForm";
+import ProdutoForm from "./components/ProdutoForm";
+import ListaClientes from "./components/ListaClientes";
+import ListaProdutos from "./components/ListaProdutos";
+import ListaConsumos from "./components/ListaConsumos";
+import ConsumoForm from "./components/ConsumoForm";
 
 const App: React.FC = () => {
-  const [data, setData] = useState<any>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:3030/api'); // Altere para a URL da sua API
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
   return (
-    <div>
-      <h1>Olá, Front-end!</h1>
-      {data ? <h2>{data.message}</h2> : <p>Carregando...</p>}
-    </div>
+    <Router>
+      <nav>
+        <ul>
+          <li><Link to="/clientes">Clientes</Link></li>
+          <li><Link to="/produtos">Produtos</Link></li>
+          <li><Link to="/consumos">Consumos</Link></li>
+          <li><Link to="/cadastro-consumo">Cadastrar Consumo</Link></li>
+          <li><Link to="/cadastro-cliente">Cadastrar Cliente</Link></li>
+          <li><Link to="/cadastro-produto">Cadastrar Produto</Link></li>
+        </ul>
+      </nav>
+
+      <Routes>
+        <Route path="/clientes" element={<ListaClientes />} />
+        <Route path="/produtos" element={<ListaProdutos />} />
+        <Route path="/consumos" element={<ListaConsumos />} />
+        <Route path="/cadastro-consumo" element={<ConsumoForm />} />
+        <Route path="/cadastro-cliente" element={<ClienteForm />} />
+        <Route path="/cadastro-produto" element={<ProdutoForm />} />
+        <Route path="/" element={<h1>Bem-vindo ao Sistema de Gestão!</h1>} />
+      </Routes>
+    </Router>
   );
-  
 };
 
 export default App;

@@ -10,9 +10,12 @@ export class ConsumoService {
     this.produtoService = produtoService;
   }
 
-  registrar(consumo: Consumo) {
+  registrar(clienteId: number, produtoId: number, quantidade: number) {
+    const consumo = new Consumo(clienteId, produtoId, quantidade);
     this.consumos.push(consumo);
+    console.log("Consumo registrado com sucesso!");
   }
+
 
   listar(): Consumo[] {
     return this.consumos;

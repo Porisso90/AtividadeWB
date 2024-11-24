@@ -1,12 +1,12 @@
 // main.ts
 import readlineSync from 'readline-sync';
-import { Cliente } from '../src/models/Cliente';
+//import { Cliente } from '../src/models/Cliente';
 import { ClienteService } from '../src/services/ClienteService';
 import { ProdutoService } from '../src/services/ProdutoService';
-import { ConsumoService } from '../src/services/ConsumoService';
+//import { ConsumoService } from '../src/services/ConsumoService';
 
 const produtoService = new ProdutoService();
-const consumoService = new ConsumoService(produtoService);
+//const consumoService = new ConsumoService(produtoService);
 const clienteService = new ClienteService(produtoService);
 
 function exibirMenuPrincipal() {
@@ -147,7 +147,8 @@ function menuRegistroConsumo() {
             case '1':
                 const clienteId = readlineSync.questionInt('ID do Cliente: ');
                 const produtoId = readlineSync.questionInt('ID do Produto: ');
-                clienteService.registrarConsumo(clienteId, produtoId);
+                const quantidadeId = readlineSync.questionInt('quantidade do Produto: ');
+                clienteService.registrarConsumo(clienteId, produtoId,quantidadeId);
                 break;
             case '2':
                 console.log(clienteService.listarConsumoes());
